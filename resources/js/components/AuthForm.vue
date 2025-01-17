@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { Link } from "@inertiajs/vue3";
 import AppLoader from "./AppLoader.vue";
 
