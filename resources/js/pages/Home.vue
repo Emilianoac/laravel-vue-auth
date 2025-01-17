@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineProps } from "vue";
 import { Head } from "@inertiajs/vue3";
 import IconUser from "../components/icons/IconUser.vue";
 import IconLogout from "../components/icons/IconLogout.vue";
