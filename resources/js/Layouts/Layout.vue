@@ -8,7 +8,7 @@ defineOptions({
 
 <template>
     <AppHeader />
-    <main class="mt-10 p-4">
+    <main class="mt-6 p-4">
         <slot></slot>
     </main>
 </template>

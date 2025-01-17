@@ -6,8 +6,8 @@ import { useFormErrors } from "../composables/useFormErrors";
 import AuthForm from "../components/AuthForm.vue";
 
 const loginForm = reactive({
-    email: { value: "", label: "Correo Electrónico" },
-    password: { value: "", label: "Contraseña" },
+    email: { value: "", label: "Correo Electrónico", layout: "full" },
+    password: { value: "", label: "Contraseña", layout: "full" },
 });
 
 const isloading = ref(false);

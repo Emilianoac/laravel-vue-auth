@@ -5,6 +5,8 @@ import IconLogout from "../components/icons/IconLogout.vue";
 
 interface User {
     name: string;
+    lastname: string;
+    phone: string;
     email: string;
 }
 
@@ -22,8 +24,16 @@ defineProps<{ user: User }>();
             <span class="item-value">{{ user.name }}</span>
         </div>
         <div class="user-card__item">
+            <span class="item-title">Apellido</span>
+            <span class="item-value">{{ user.lastname }}</span>
+        </div>
+        <div class="user-card__item">
             <span class="item-title">Correo electronico</span>
             <span class="item-value">{{ user.email }}</span>
+        </div>
+        <div class="user-card__item">
+            <span class="item-title">Teléfono</span>
+            <span class="item-value">{{ user.phone }}</span>
         </div>
 
         <a class="user-card-logout" href="/logout">Cerrar sesión

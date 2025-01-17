@@ -6,10 +6,13 @@ import AuthForm from "../components/AuthForm.vue";
 import { useFormErrors } from "../composables/useFormErrors";
 
 const registerForm = reactive({
-    name: { value: "", label: "Nombre" },
-    email: { value: "", label: "Correo Electrónico" },
-    password: { value: "", label: "Contraseña" },
+    name: { value: "", label: "Nombre", layout: "half" },
+    lastname: { value: "", label: "Apellido", layout: "half" },
+    phone: { value: "", label: "Teléfono", layout: "full" },
+    email: { value: "", label: "Correo Electrónico", layout: "full" },
+    password: { value: "", label: "Contraseña", layout: "full" },
 });
+
 
 const isloading = ref(false);
 

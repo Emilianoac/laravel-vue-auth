@@ -10,7 +10,7 @@ interface Message {
 }
 
 const props = defineProps<{
-    form: Record<string, { value: any; label: string }>;
+    form: Record<string, { value: any; label: string, layout: string }>;
     errors: Record<string, string[]>;
     submitText: String;
     message: Message;
@@ -25,26 +25,38 @@ async function handleSubmit() {
 </script>
 
 <template>
-    <AppLoader v-if="isloading"/>
+    <AppLoader v-if="isloading" />
     <form class="app-form" @submit.prevent="handleSubmit">
         <h1 class="app-form__title">{{ title }}</h1>
 
-        <div class="app-form__field" v-for="(field, key) in form" :key="key">
-            <label :for="key">{{ field.label }}</label>
-            <input
-                :type="key === 'password' ? 'password' : 'text'"
-                :id="key"
-                v-model="field.value"
-            />
-            <p v-if="errors[key]" class="app-form__error">{{ errors[key][0] }}</p>
+        <!-- Campos del formulario -->
+        <div class="app-form__grid">
+            <div
+                v-for="(field, key) in form"
+                :key="key"
+                :class="[
+                    'app-form__field',
+                    field.layout === 'half' ? 'app-form__field--half' : 'app-form__field--full',
+                ]"
+            >
+                <label :for="key">{{ field.label }}</label>
+                <input
+                    :type="key === 'password' ? 'password' : 'text'"
+                    :id="key"
+                    v-model="field.value"
+                />
+                <p v-if="errors[key]" class="app-form__error">{{ errors[key][0] }}</p>
+            </div>
         </div>
 
+        <!-- Errores generales -->
         <div
             v-if="errors.general"
             class="app-form__error mb-4"
             v-for="(error, index) in errors.general"
-            :key="index">
-                {{ error }}
+            :key="index"
+        >
+            {{ error }}
         </div>
 
         <button class="app-form__button" type="submit">
@@ -63,15 +75,20 @@ async function handleSubmit() {
 <style lang="postcss">
 .app-form {
     @apply p-4 bg-white dark:bg-slate-800;
-    @apply shadow-md max-w-[400px] mx-auto rounded;
+    @apply shadow-md max-w-[450px] mx-auto rounded;
 }
 
 .app-form__title {
     @apply text-center font-bold text-xl mb-5;
 }
 
+.app-form__grid {
+    @apply grid gap-2;
+    @apply grid-cols-1 md:grid-cols-2;
+}
+
 .app-form__field {
-    @apply mb-4 last:mb-0;
+    @apply mb-2 last:mb-0;
 
     label {
         @apply block font-semibold text-sm mb-1;
@@ -85,12 +102,20 @@ async function handleSubmit() {
     }
 }
 
+.app-form__field--half {
+    @apply col-span-2 md:col-span-1;
+}
+
+.app-form__field--full {
+    @apply col-span-2;
+}
+
 .app-form__error {
-    @apply text-red-500 text-sm mt-1;
+    @apply text-red-500 text-xs mt-1;
 }
 
 .app-form__button {
-    @apply block w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded;
+    @apply block w-full bg-blue-500 text-white font-semibold py-2 px-4 rounded mt-4;
     @apply hover:bg-blue-600;
 }
 </style>
